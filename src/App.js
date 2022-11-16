@@ -11,7 +11,8 @@ function App() {
   const contactsListShort = contacts.slice(0, 5)
   const contactsListRest = contacts.slice(5)
 
-  const [contactsList, setContactList] = useState(contactsListShort)
+
+  const [contactsList, setContactList] = useState(contactsListShort) //intial state
 
   
   const randomContactHandler = () => {
@@ -42,9 +43,12 @@ function App() {
   }
 
 
-  const deleteHandler = () => {
+  const deleteHandler = (contactsId) => {
+    let deleteContact = [...contactsList].filter(contacts => {
+      return contacts.id !== contactsId
+    })
 
-    setContactList()
+    setContactList(deleteContact)
   }
 
 
@@ -83,7 +87,7 @@ function App() {
               <td>{contact.popularity}</td>
               {contact.wonOscar && <td>🏆</td> }
               {contact.wonEmmy && <td>🏆</td> }
-              <td><button>Delete</button></td>
+              <td><button onClick={()=> deleteHandler(contact.id)}>Delete</button></td>
             </tr>
           )
         })}
